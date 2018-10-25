@@ -1,0 +1,13 @@
+{
+  "name": "web_app",
+  "version": "1.0.0",
+  "description": "basic web app",
+  "main": "server.js",
+  "author": "Rudi Kelly <rudikellyy@gmail.com>",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "latest"
+  }
+}
