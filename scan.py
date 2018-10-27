@@ -3,6 +3,7 @@
 import os
 import sys
 import json
+import gzip
 from glob import glob
 from pydpkg import Dpkg as dpkg
 
@@ -14,10 +15,14 @@ def write_packages(pkgs_info, outputDir):
                 f.write(field + ": " + value + "\n")
             f.write("\n")
 
+    # Gzips Packages
+    with open(outputDir + "Packages", 'r') as f:
+        with gzip.open(outputDir + "Packages.gz", "wb") as archive:
+            archive.write(f.read().encode())
+
 # Writes dats to 'Packages.json' file
 def write_json(pkgs_info, outputDir):
     with open(outputDir + "Packages.json", "w") as f:
-        print("PP")
         json.dump(pkgs_info, f, indent=1)
 
 # Gets all .deb files in 'debs' and grabs their control data
