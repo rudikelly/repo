@@ -11,7 +11,7 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 app.get('/', (req, res) => {
-  res.send('Hello world\n');
+  res.render('home', {title: "Home"});
 });
 
 app.listen(PORT, HOST);
