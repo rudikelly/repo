@@ -10,6 +10,8 @@ const app = express();
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
+app.use(express.static('static'));
+
 app.get('/', (req, res) => {
   res.render('home', {title: "Home"});
 });
