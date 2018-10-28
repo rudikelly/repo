@@ -16,7 +16,7 @@ app.use(express.static('static'));
 
 function refreshPackages() {
   var filePath = path.join(process.cwd(), "scan.py")
-  execFile(filePath, ["static/debs", "static"], function(err){
+  execFile(filePath, ["--dir", "static/debs", "-o", "static"], function(err){
     if (err) console.log(err);
   });
 }
