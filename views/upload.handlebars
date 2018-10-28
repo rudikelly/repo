@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-6 offset-md-3" style="width:95%;margin:0 auto;">
+    <form method="post" enctype="multipart/form-data">
+      <!-- File upload -->
+      <div class="custom-file mt-2">
+        <input type="file" class="custom-file-input" id="fileUpload" name="deb">
+        <label class="custom-file-label" for="fileUpload" style="overflow:hidden">Choose file (.deb)</label>
+      </div>
+      <!-- Submit button -->
+      <input type="submit" class="btn btn-dark btn-block mt-2"></input>
+    </form>
+  </div>
+</div>
+<script>
+  $("input[type=file]").change(function () {
+    var fieldVal = $(this).val();
+    fieldVal = fieldVal.replace("C:\\fakepath\\", "");
+    if (fieldVal != undefined || fieldVal != "") {
+      $(this).next(".custom-file-label").attr('data-content', fieldVal);
+      $(this).next(".custom-file-label").text(fieldVal);
+    }
+  });
+</script>
