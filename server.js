@@ -15,16 +15,15 @@ app.set('view engine', 'handlebars');
 
 app.use(express.static('static'));
 
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, 'uploads');
-  },
-  filename: function(req, file, cb) {
-    cb(null, file.originalname);
-  }
-});
 const upload = multer({
-  storage: storage,
+  storage: multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, 'uploads');
+    },
+    filename: function(req, file, cb) {
+      cb(null, file.originalname);
+    }
+  }),
   fileFilter: function(req, file, cb) {
     var extCheck = file.originalname.split('.').slice(-1)[0] == 'deb';
     var mimeCheck = file.mimetype == 'application/octet-stream';
