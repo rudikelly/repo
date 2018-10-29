@@ -26,8 +26,8 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   fileFilter: function(req, file, cb) {
-    var extCheck = file.originalname.split(".").slice(-1)[0] == "deb";
-    var mimeCheck = file.mimetype == "application/octet-stream";
+    var extCheck = file.originalname.split('.').slice(-1)[0] == 'deb';
+    var mimeCheck = file.mimetype == 'application/octet-stream';
     if (extCheck && mimeCheck) {
       return cb(null, true);
     }
@@ -36,25 +36,25 @@ const upload = multer({
 });
 
 function refreshPackages() {
-  var filePath = path.join(process.cwd(), "scan.py")
-  execFile(filePath, ["--dir", "static/debs", "-o", "static"], function(err){
+  var filePath = path.join(process.cwd(), 'scan.py');
+  execFile(filePath, ['--dir', 'static/debs', '-o', 'static'], function(err){
     if (err) console.log(err);
   });
 }
 
 app.get('/', (req, res) => {
-  res.render('home', {title: "Home"});
+  res.render('home', {title: 'Home'});
 });
 
 app.get('/upload', (req, res) => {
-  res.render('upload', {title: "Upload"});
+  res.render('upload', {title: 'Upload'});
 });
 
 app.post('/upload', upload.single('deb'), (req, res) => {
   if (req.file == null) {
-    res.send("invalid file");
+    res.send('invalid file');
   } else {
-    res.send("received: " + req.file.originalname);
+    res.send('received: ' + req.file.originalname);
   }
 });
 
