@@ -1,7 +1,7 @@
 {
-  "name": "web_app",
+  "name": "repo",
   "version": "1.0.0",
-  "description": "basic web app",
+  "description": "a basic repo",
   "main": "server.js",
   "author": "Rudi Kelly <rudikellyy@gmail.com>",
   "scripts": {
