@@ -11,7 +11,9 @@ const PORT = 8080;
 const HOST = '0.0.0.0';
 
 const app = express();
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main'
+}));
 app.set('view engine', 'handlebars');
 
 app.use(express.static('static'));
