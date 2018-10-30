@@ -45,6 +45,10 @@ app.get('/', (req, res) => {
   res.render('home', {title: 'Home'});
 });
 
+app.get('/signup', (req, res) => {
+  res.render('signup', {title: 'Sign Up'});
+});
+
 app.get('/upload', (req, res) => {
   res.render('upload', {title: 'Upload'});
 });
