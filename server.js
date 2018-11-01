@@ -21,6 +21,7 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 
 app.use(express.static('static'));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const upload = multer({
   storage: multer.diskStorage({
