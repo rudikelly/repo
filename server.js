@@ -8,6 +8,7 @@ const multer = require('multer');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
 
 const User = require('./models/user');
 
@@ -20,6 +21,13 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
+mongoose.connect('mongodb://localhost/repo', {
+  useNewUrlParser: true,
+  useCreateIndex: true
+});
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
 app.use(express.static('static'));
 app.use(bodyParser.urlencoded({
   extended: true
@@ -27,15 +35,11 @@ app.use(bodyParser.urlencoded({
 app.use(session({
   secret: 'aYhjO?Qx/Pp)WwvBxl?',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
 }));
-
-mongoose.connect('mongodb://localhost/repo', {
-  useNewUrlParser: true,
-  useCreateIndex: true
-});
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
 
 const upload = multer({
   storage: multer.diskStorage({
