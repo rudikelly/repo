@@ -88,12 +88,23 @@ app.post('/signup', (req, res) => {
       password: req.body.password
     };
 
-    User.create(userData, function (error, user) {
-      if (error) {
-        throw error;
-      } else {
-        req.session.userId = user._id;
-        return res.send('signed in as ' + user.firstName);
+    User.findOne({email: req.body.email}, (err, user) => {
+      if (err) throw err;
+      else if (user) {
+        res.render('signup', {
+          title: 'Sign Up',
+          error: 'That email address is already in use'
+        });
+      }
+      else {
+        User.create(userData, function (error, user) {
+          if (error) {
+            throw error;
+          } else {
+            req.session.userId = user._id;
+            return res.send('signed in as ' + user.firstName);
+          }
+        });
       }
     });
   }
