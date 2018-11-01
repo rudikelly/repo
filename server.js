@@ -88,6 +88,7 @@ app.post('/signup', upload.none(), (req, res) => {
       if (error) {
         throw error;
       } else {
+        req.session.id = user._id;
         return res.send('signed in as ' + user.firstName);
       }
     });
