@@ -21,7 +21,14 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 
 app.use(express.static('static'));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(session({
+  secret: 'aYhjO?Qx/Pp)WwvBxl?',
+  resave: false,
+  saveUninitialized: false
+}));
 
 mongoose.connect('mongodb://localhost/repo', {
   useNewUrlParser: true,
