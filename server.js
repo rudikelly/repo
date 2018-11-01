@@ -7,6 +7,7 @@ const execFile = require('child_process').execFile;
 const multer = require('multer');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const PORT = 8080;
 const HOST = '0.0.0.0';
