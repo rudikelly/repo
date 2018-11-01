@@ -9,6 +9,8 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const User = require('./models/user');
+
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
