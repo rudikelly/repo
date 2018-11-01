@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars');
 const execFile = require('child_process').execFile;
 const multer = require('multer');
 const session = require('express-session');
+const bodyParser = require('body-parser');
 
 const PORT = 8080;
 const HOST = '0.0.0.0';
