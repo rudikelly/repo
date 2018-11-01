@@ -64,6 +64,31 @@ app.get('/signup', (req, res) => {
   res.render('signup', {title: 'Sign Up'});
 });
 
+app.post('/signup', upload.none(), (req, res) => {
+  if (req.body.firstName &&
+      req.body.lastName &&
+      req.body.email &&
+      req.body.password &&
+      req.body.confirmPassword) {
+
+    const userData = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      confirmPassword: req.body.confirmPassword
+    };
+
+    User.create(userData, function (error, user) {
+      if (error) {
+        throw error;
+      } else {
+        return res.send('signed in as ' + user.firstName);
+      }
+    });
+  }
+});
+
 app.get('/upload', (req, res) => {
   res.render('upload', {title: 'Upload'});
 });
