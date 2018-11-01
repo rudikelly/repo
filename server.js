@@ -71,7 +71,7 @@ app.get('/signup', (req, res) => {
   res.render('signup', {title: 'Sign Up'});
 });
 
-app.post('/signup', upload.none(), (req, res) => {
+app.post('/signup', (req, res) => {
   if (req.body.firstName &&
       req.body.lastName &&
       req.body.email &&
