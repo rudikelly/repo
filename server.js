@@ -23,6 +23,13 @@ app.set('view engine', 'handlebars');
 app.use(express.static('static'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+mongoose.connect('mongodb://localhost/repo', {
+  useNewUrlParser: true,
+  useCreateIndex: true
+});
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
 const upload = multer({
   storage: multer.diskStorage({
     destination: function(req, file, cb) {
