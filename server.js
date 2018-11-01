@@ -95,6 +95,10 @@ app.post('/signup', (req, res) => {
   }
 });
 
+app.get('/signin', (req, res) => {
+  res.render('signin', {title: 'Sign In'});
+});
+
 app.get('/upload', (req, res) => {
   res.render('upload', {title: 'Upload'});
 });
