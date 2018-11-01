@@ -68,15 +68,13 @@ app.post('/signup', upload.none(), (req, res) => {
   if (req.body.firstName &&
       req.body.lastName &&
       req.body.email &&
-      req.body.password &&
-      req.body.confirmPassword) {
+      req.body.password) {
 
     const userData = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      password: req.body.password,
-      confirmPassword: req.body.confirmPassword
+      password: req.body.password
     };
 
     User.create(userData, function (error, user) {
