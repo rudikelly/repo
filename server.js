@@ -1,15 +1,10 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
-const execFile = require('child_process').execFile;
-const multer = require('multer');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 const MongoStore = require('connect-mongo')(session);
 
 const User = require('./models/user');
