@@ -8,6 +8,7 @@ const multer = require('multer');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const MongoStore = require('connect-mongo')(session);
 
 const User = require('./models/user');
@@ -112,6 +113,38 @@ app.post('/signup', (req, res) => {
 
 app.get('/signin', (req, res) => {
   res.render('signin', {title: 'Sign In'});
+});
+
+app.post('/signin', (req, res) => {
+  if (req.body.email &&
+      req.body.password) {
+
+    User.findOne({email: req.body.email}, (err, user) => {
+      if (err) throw err;
+      else if (!user) {
+        console.log('ugh');
+        res.render('signin', {
+          title: 'Sign In',
+          error: 'Invalid credentials'
+        });
+      }
+      else {
+        bcrypt.compare(req.body.password, user.password, (err, result) => {
+          if (err) throw err;
+          if (result) {
+            req.session.user = user;
+            req.session.userId = user._id;
+            res.redirect('profile');
+          } else {
+            res.render('signin', {
+              title: 'Sign In',
+              error: 'Invalid credentials'
+            });
+          }
+        });
+      }
+    });
+  }
 });
 
 app.get('/upload', (req, res) => {
