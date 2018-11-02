@@ -13,6 +13,10 @@ const bcrypt = require('bcryptjs');
 const MongoStore = require('connect-mongo')(session);
 
 const User = require('./models/user');
+const userRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const uploadRouter = require('./routes/upload');
+const debRouter = require('./routes/debs');
 
 const PORT = 8080;
 const HOST = '0.0.0.0';
@@ -43,155 +47,10 @@ app.use(session({
   })
 }));
 
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: function(req, file, cb) {
-      cb(null, 'uploads');
-    },
-    filename: function(req, file, cb) {
-      cb(null, file.originalname);
-    }
-  }),
-  fileFilter: function(req, file, cb) {
-    var extCheck = file.originalname.split('.').slice(-1)[0] == 'deb';
-    var mimeCheck = file.mimetype == 'application/octet-stream';
-    if (extCheck && mimeCheck) {
-      return cb(null, true);
-    }
-    cb(null, false);
-  }
-});
-
-function refreshPackages() {
-  var filePath = path.join(process.cwd(), 'scan.py');
-  execFile(filePath, ['--dir', 'static/debs', '-o', 'static'], function(err){
-    if (err) console.log(err);
-  });
-}
-
-app.get('/', (req, res) => {
-  res.render('home', {title: 'Home'});
-});
-
-app.get('/signup', (req, res) => {
-  res.render('signup', {title: 'Sign Up'});
-});
-
-app.post('/signup', (req, res) => {
-  if (req.body.firstName &&
-      req.body.lastName &&
-      req.body.email &&
-      req.body.password) {
-
-    const userData = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password
-    };
-
-    User.findOne({email: req.body.email}, (err, user) => {
-      if (err) throw err;
-      else if (user) {
-        res.render('signup', {
-          title: 'Sign Up',
-          error: 'That email address is already in use'
-        });
-      }
-      else {
-        User.create(userData, function (error, user) {
-          if (error) {
-            throw error;
-          } else {
-            req.session.userId = user._id;
-            return res.send('signed in as ' + user.firstName);
-          }
-        });
-      }
-    });
-  }
-});
-
-app.get('/signin', (req, res) => {
-  res.render('signin', {title: 'Sign In'});
-});
-
-app.post('/signin', (req, res) => {
-  if (req.body.email &&
-      req.body.password) {
-
-    User.findOne({email: req.body.email}, (err, user) => {
-      if (err) throw err;
-      else if (!user) {
-        console.log('ugh');
-        res.render('signin', {
-          title: 'Sign In',
-          error: 'Invalid credentials'
-        });
-      }
-      else {
-        bcrypt.compare(req.body.password, user.password, (err, result) => {
-          if (err) throw err;
-          if (result) {
-            req.session.userId = user._id;
-            res.redirect('profile');
-          } else {
-            res.render('signin', {
-              title: 'Sign In',
-              error: 'Invalid credentials'
-            });
-          }
-        });
-      }
-    });
-  }
-});
-
-app.get('/profile', (req, res) => {
-  if (req.session.user &&
-      req.session.userId) {
-    User.findOne({_id: req.session.userId}, (err, user) => {
-      res.send('welcome back ' + user.firstName);
-    });
-  }
-  else {
-    res.redirect('/');
-  }
-});
-
-app.get('/upload', (req, res) => {
-  res.render('upload', {title: 'Upload'});
-});
-
-app.post('/upload', upload.single('deb'), (req, res) => {
-  if (req.file == null) {
-    res.send('invalid file');
-  } else {
-    res.send('received: ' + req.file.originalname);
-  }
-});
-
-app.get('/logout', (req, res) => {
-  if (req.session) {
-    req.session.destroy((err) => {
-      if (err) throw err;
-    });
-  }
-  res.redirect('/');
-});
-
-app.get('/deb/:deb', (req, res) => {
-  const deb = req.params.deb;
-  res.sendFile(deb, {root: './deb'}, (err) => {
-    if (err) {
-      if (err.code == 'ENOENT') {
-        res.sendStatus(404);
-      } else {
-        throw err;
-      }
-    }
-  });
-});
+app.use(indexRouter);
+app.use(userRouter);
+app.use(uploadRouter);
+app.use(debRouter);
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
