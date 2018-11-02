@@ -147,6 +147,18 @@ app.post('/signin', (req, res) => {
   }
 });
 
+app.get('/profile', (req, res) => {
+  if (req.session.user &&
+      req.session.userId) {
+    User.findOne({_id: req.session.userId}, (err, user) => {
+      res.send('welcome back ' + user.firstName);
+    });
+  }
+  else {
+    res.redirect('/');
+  }
+});
+
 app.get('/upload', (req, res) => {
   res.render('upload', {title: 'Upload'});
 });
