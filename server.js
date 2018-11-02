@@ -132,7 +132,6 @@ app.post('/signin', (req, res) => {
         bcrypt.compare(req.body.password, user.password, (err, result) => {
           if (err) throw err;
           if (result) {
-            req.session.user = user;
             req.session.userId = user._id;
             res.redirect('profile');
           } else {
