@@ -171,5 +171,14 @@ app.post('/upload', upload.single('deb'), (req, res) => {
   }
 });
 
+app.get('/logout', (req, res) => {
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) throw err;
+    });
+  }
+  res.redirect('/');
+});
+
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
