@@ -80,8 +80,7 @@ router.post('/signin', (req, res) => {
 });
 
 router.get('/profile', (req, res) => {
-  if (req.session.user &&
-      req.session.userId) {
+  if (req.session.userId) {
     User.findOne({_id: req.session.userId}, (err, user) => {
       res.send('welcome back ' + user.firstName);
     });
