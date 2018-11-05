@@ -25,7 +25,7 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-mongoose.connect(process.env.DB_URL, {
+mongoose.connect(process.env.DB_URL + process.env.NODE_ENV, {
   useNewUrlParser: true,
   useCreateIndex: true
 });
