@@ -8,4 +8,4 @@ services: mongodb
 env:
   global:
     - DB_URL=mongodb://localhost/
-    - COOKIE_SECRET="super secret"
+    - COOKIE_SECRET=supersecret
