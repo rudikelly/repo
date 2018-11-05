@@ -41,6 +41,8 @@ router.post('/signup', (req, res) => {
         });
       }
     });
+  } else {
+    res.sendStatus(400);
   }
 });
 
@@ -76,6 +78,8 @@ router.post('/signin', (req, res) => {
         });
       }
     });
+  } else {
+    res.sendStatus(400);
   }
 });
 
