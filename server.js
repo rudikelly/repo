@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 
@@ -32,6 +33,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 app.use(express.static('static'));
 app.use(morgan('dev'));
+app.use(helmet);
 app.use(bodyParser.urlencoded({
   extended: true
 }));
