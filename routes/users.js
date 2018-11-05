@@ -25,10 +25,11 @@ router.post('/signup', (req, res) => {
     User.findOne({email: req.body.email}, (err, user) => {
       if (err) throw err;
       else if (user) {
-        res.render('signup', {
-          title: 'Sign Up',
-          error: 'That email address is already in use'
-        });
+        res.status(400)
+          .render('signup', {
+            title: 'Sign Up',
+            error: 'That email address is already in use'
+          });
       }
       else {
         User.create(userData, function (error, user) {
@@ -58,10 +59,11 @@ router.post('/signin', (req, res) => {
       if (err) throw err;
       else if (!user) {
         console.log('ugh');
-        res.render('signin', {
-          title: 'Sign In',
-          error: 'Invalid credentials'
-        });
+        res.status(400)
+          .render('signin', {
+            title: 'Sign In',
+            error: 'Invalid credentials'
+          });
       }
       else {
         bcrypt.compare(req.body.password, user.password, (err, result) => {
@@ -70,10 +72,11 @@ router.post('/signin', (req, res) => {
             req.session.userId = user._id;
             res.redirect('profile');
           } else {
-            res.render('signin', {
-              title: 'Sign In',
-              error: 'Invalid credentials'
-            });
+            res.status(400)
+              .render('signin', {
+                title: 'Sign In',
+                error: 'Invalid credentials'
+              });
           }
         });
       }
