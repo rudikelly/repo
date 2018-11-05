@@ -34,7 +34,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 app.use(express.static('static'));
 app.use(morgan('dev'));
-app.use(helmet);
+app.use(helmet());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
