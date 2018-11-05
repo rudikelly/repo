@@ -1,5 +1,10 @@
 language: node_js
 node_js:
   - "node"
+
 cache: npm
 services: mongodb
+
+env:
+  - DB_URL=mongodb://localhost/
+  - COOKIE_SECRET=aUhj7?$x/Pp)WwNBx/?
