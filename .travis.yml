@@ -6,5 +6,6 @@ cache: npm
 services: mongodb
 
 env:
-  - DB_URL=mongodb://localhost/
-  - COOKIE_SECRET="super secret"
+  global:
+    - DB_URL=mongodb://localhost/
+    - COOKIE_SECRET="super secret"
