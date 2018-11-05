@@ -7,4 +7,4 @@ services: mongodb
 
 env:
   - DB_URL=mongodb://localhost/
-  - COOKIE_SECRET=aUhj7?$x/Pp)WwNBx/?
+  - COOKIE_SECRET="super secret"
