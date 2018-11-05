@@ -58,7 +58,6 @@ router.post('/signin', (req, res) => {
     User.findOne({email: req.body.email}, (err, user) => {
       if (err) throw err;
       else if (!user) {
-        console.log('ugh');
         res.status(400)
           .render('signin', {
             title: 'Sign In',
