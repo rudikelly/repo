@@ -25,7 +25,7 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-mongoose.connect('mongodb://localhost/repo', {
+mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
   useCreateIndex: true
 });
@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(session({
-  secret: 'aYhjO?Qx/Pp)WwvBxl?',
+  secret: process.env.COOKIE_SECRET,
   resave: false,
   saveUninitialized: false,
   store: new MongoStore({
