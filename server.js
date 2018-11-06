@@ -32,8 +32,10 @@ mongoose.connect(process.env.DB_URL + process.env.NODE_ENV, {
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
+if (process.env.NODE_ENV == 'development') {
+  app.use(morgan('dev'));
+}
 app.use(express.static('static'));
-app.use(morgan('dev'));
 app.use(helmet());
 app.use(bodyParser.urlencoded({
   extended: true
