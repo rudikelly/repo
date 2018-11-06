@@ -24,7 +24,6 @@
       </button>
       <div class="dropdown-menu dropdown-menu-right">
         <a class="dropdown-item" href="/profile">Your Account</a>
-
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="/logout">
           <i class="fas fa-sign-out-alt pr-1"></i>Logout
@@ -32,11 +31,21 @@
       </div>
     </div>
     {{else}}
-    <a href="signin">
-      <button class="btn btn-dark" style="color: white" type="button" id="dropdownMenuButton">
-        <i class="fas fa-sign-out-alt pr-1"></i>Sign In
+    </button>
+    <div class="dropdown">
+      <button class="btn btn-dark dropdown-toggle" style="color: white" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+         <i class="far fa-user pr-2"></i>Sign In
       </button>
-    </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="/signin">
+          <i class="fas fa-sign-in-alt pr-2"></i>Sign In
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/signup">
+          <i class="fas fa-user-plus pr-2"></i>Sign Up
+        </a>
+      </div>
+    </div>
     {{/if}}
   </nav>
 
