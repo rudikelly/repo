@@ -22,7 +22,7 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "helmet": "^3.15.0",
-    "mongoose": "^5.3.10",
+    "mongoose": "^5.3.11",
     "morgan": "^1.9.1",
     "multer": "^1.4.1"
   },
