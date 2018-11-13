@@ -5,7 +5,6 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
@@ -32,9 +31,6 @@ mongoose.connect(process.env.DB_URL + process.env.NODE_ENV, {
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
-if (process.env.NODE_ENV == 'development') {
-  app.use(morgan('dev'));
-}
 app.use(express.static('static'));
 app.use(helmet());
 app.use(bodyParser.urlencoded({
