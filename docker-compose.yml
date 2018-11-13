@@ -1,18 +1,36 @@
 version: "3"
 services:
+
   repo:
     container_name: repo
     build: .
     restart: always
     ports:
       - "8080:8080"
+    networks:
+      - repo-net
     volumes:
       - .:/usr/src/app
     links:
       - mongo
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      - repo-net
+    links:
+      - repo
 
   mongo:
     container_name: mongo
     image: mongo
     ports:
       - "27017:27017"
+
+networks:
+  repo-net:
+    driver: bridge
