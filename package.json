@@ -10,8 +10,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "mocha --no-deprecation --exit",
-    "lint": "eslint ."
+    "test": "./node_modules/.bin/mocha--no-deprecation --exit",
+    "lint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
