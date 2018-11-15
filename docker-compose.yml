@@ -33,8 +33,6 @@ services:
       - "27017:27017"
     networks:
       - repo-net
-    logging:
-      driver: "none"
 
 networks:
   repo-net:
