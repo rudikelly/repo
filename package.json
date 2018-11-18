@@ -10,6 +10,7 @@
   },
   "scripts": {
     "start": "node server.js",
+    "pretest": "npm run lint",
     "test": "./node_modules/.bin/mocha --recursive --no-deprecation --exit",
     "lint": "./node_modules/.bin/eslint ."
   },
