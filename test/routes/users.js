@@ -34,7 +34,7 @@ describe('Users', () => {
           firstName: 'firstName',
           lastName: 'lastName',
           email: 'testEmail',
-          password: 'password'
+          password: 'password',
         })
         .end((err, res) => {
           expect(res).to.have.status(200);
@@ -57,7 +57,7 @@ describe('Users', () => {
           firstName: 'firstName',
           lastName: 'lastName',
           email: 'testEmail',
-          password: 'password'
+          password: 'password',
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
@@ -80,7 +80,7 @@ describe('Users', () => {
         .set('content-type', 'application/x-www-form-urlencoded')
         .send({
           email: 'testEmail',
-          password: 'password'
+          password: 'password',
         })
         .end((err, res) => {
           expect(res).to.have.status(200);
@@ -93,7 +93,7 @@ describe('Users', () => {
         .set('content-type', 'application/x-www-form-urlencoded')
         .send({
           email: 'invalidEmail',
-          password: 'password'
+          password: 'password',
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
@@ -106,7 +106,7 @@ describe('Users', () => {
         .set('content-type', 'application/x-www-form-urlencoded')
         .send({
           email: 'testEmail',
-          password: 'invalidPassword'
+          password: 'invalidPassword',
         })
         .end((err, res) => {
           expect(res).to.have.status(400);

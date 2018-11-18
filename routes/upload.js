@@ -10,7 +10,7 @@ const upload = multer({
     },
     filename: function(req, file, cb) {
       cb(null, file.originalname);
-    }
+    },
   }),
   fileFilter: function(req, file, cb) {
     var extCheck = file.originalname.split('.').slice(-1)[0] == 'deb';
@@ -19,7 +19,7 @@ const upload = multer({
       return cb(null, true);
     }
     cb(null, false);
-  }
+  },
 });
 
 router.get('/upload', (req, res) => {

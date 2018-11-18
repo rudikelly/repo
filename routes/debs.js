@@ -17,7 +17,7 @@ router.get('/deb/:deb', (req, res) => {
     machine: req.headers['x-machine'],
     firmware: req.headers['x-firmware'],
     uuid: req.headers['x-unique-id'],
-    ua: req.headers['user-agent']
+    ua: req.headers['user-agent'],
   };
 });
 

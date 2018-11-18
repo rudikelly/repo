@@ -19,7 +19,7 @@ router.post('/signup', (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
     };
 
     User.findOne({email: req.body.email}, (err, user) => {
@@ -28,7 +28,7 @@ router.post('/signup', (req, res) => {
         res.status(400)
           .render('signup', {
             title: 'Sign Up',
-            error: 'That email address is already in use'
+            error: 'That email address is already in use',
           });
       }
       else {
@@ -61,7 +61,7 @@ router.post('/signin', (req, res) => {
         res.status(400)
           .render('signin', {
             title: 'Sign In',
-            error: 'Invalid credentials'
+            error: 'Invalid credentials',
           });
       }
       else {
@@ -74,7 +74,7 @@ router.post('/signin', (req, res) => {
             res.status(400)
               .render('signin', {
                 title: 'Sign In',
-                error: 'Invalid credentials'
+                error: 'Invalid credentials',
               });
           }
         });

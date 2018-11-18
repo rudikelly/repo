@@ -21,7 +21,7 @@ const HOST = '0.0.0.0';
 const app = express();
 
 app.engine('handlebars', exphbs({
-  defaultLayout: 'main'
+  defaultLayout: 'main',
 }));
 
 app.set('view engine', 'handlebars');
@@ -29,7 +29,7 @@ app.set('trust proxy', true);
 
 mongoose.connect(process.env.DB_URL + process.env.NODE_ENV, {
   useNewUrlParser: true,
-  useCreateIndex: true
+  useCreateIndex: true,
 });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -37,15 +37,15 @@ db.on('error', console.error.bind(console, 'connection error:'));
 app.use(express.static('static'));
 app.use(helmet());
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
 }));
 app.use(session({
   secret: process.env.COOKIE_SECRET,
   resave: false,
   saveUninitialized: false,
   store: new MongoStore({
-    mongooseConnection: db
-  })
+    mongooseConnection: db,
+  }),
 }));
 
 app.use(indexRouter);
