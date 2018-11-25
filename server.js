@@ -25,6 +25,7 @@ app.engine('handlebars', exphbs({
 
 app.set('view engine', 'handlebars');
 app.set('trust proxy', true);
+app.set('x-powered-by', false);
 
 mongoose.connect(process.env.DB_URL + process.env.NODE_ENV, {
   useNewUrlParser: true,
