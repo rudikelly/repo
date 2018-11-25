@@ -5,7 +5,6 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const helmet = require('helmet');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 
@@ -35,7 +34,6 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 app.use(express.static('static'));
-app.use(helmet());
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
