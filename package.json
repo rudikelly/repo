@@ -4,6 +4,7 @@
   "description": "a basic repo",
   "main": "server.js",
   "author": "Rudi Kelly <rudikellyy@gmail.com>",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/rudikelly/repo.git"
