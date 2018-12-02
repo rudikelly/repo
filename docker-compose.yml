@@ -6,7 +6,7 @@ services:
     build: .
     restart: always
     ports:
-      - "8080:8080"
+      - 8080:8080
     networks:
       - repo-net
     volumes:
@@ -30,7 +30,7 @@ services:
     container_name: mongo
     image: mongo
     ports:
-      - "27017:27017"
+      - 27017:27017
     networks:
       - repo-net
 
