@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 
-const User = require('./models/user');
 const userRouter = require('./routes/users');
 const indexRouter = require('./routes/index');
 const uploadRouter = require('./routes/upload');
