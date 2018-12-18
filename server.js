@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').load();
+const dotenv = require('dotenv').load();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
