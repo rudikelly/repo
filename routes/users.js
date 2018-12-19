@@ -88,7 +88,10 @@ router.post('/signin', (req, res) => {
 router.get('/profile', (req, res) => {
   if (req.session.userId) {
     User.findOne({_id: req.session.userId}, (err, user) => {
-      res.send('welcome back ' + user.firstName);
+      if (err) throw err;
+      res.render('profile',  {
+        name: user.firstName,
+      });
     });
   }
   else {
