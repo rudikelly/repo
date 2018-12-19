@@ -6,7 +6,7 @@ const User = require('../models/user');
 const router = express.Router();
 
 router.get('/signup', (req, res) => {
-  res.render('signup', {title: 'Sign Up'});
+  res.render('signup');
 });
 
 router.post('/signup', (req, res) => {
@@ -15,7 +15,6 @@ router.post('/signup', (req, res) => {
       !req.body.email ||
       !req.body.password) {
     res.status(400).render('signup', {
-      title: 'Sign Up',
       error: 'Oops! You forgot to fill in some of the fields',
     });
   }
@@ -32,7 +31,6 @@ router.post('/signup', (req, res) => {
     if (user) {
       res.status(400)
         .render('signup', {
-          title: 'Sign Up',
           error: 'That email address is already in use',
         });
     }
@@ -47,13 +45,12 @@ router.post('/signup', (req, res) => {
 });
 
 router.get('/signin', (req, res) => {
-  res.render('signin', {title: 'Sign In'});
+  res.render('signin');
 });
 
 router.post('/signin', (req, res) => {
   if (!req.body.email || !req.body.password) {
     res.status(400).render('signup', {
-      title: 'Sign Up',
       error: 'Oops! You forgot to fill in some of the fields',
     });
   }
@@ -63,7 +60,6 @@ router.post('/signin', (req, res) => {
     if (!user) {
       res.status(400)
         .render('signin', {
-          title: 'Sign In',
           error: 'Invalid credentials',
         });
     } else {
@@ -75,7 +71,6 @@ router.post('/signin', (req, res) => {
         } else {
           res.status(400)
             .render('signin', {
-              title: 'Sign In',
               error: 'Invalid credentials',
             });
         }
