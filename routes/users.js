@@ -37,7 +37,7 @@ router.post('/signup', (req, res) => {
       User.create(userData, function (err, user) {
         if (err) throw err;
         req.session.userId = user._id;
-        return res.send('signed in as ' + user.firstName);
+        return res.redirect('profile');
       });
     }
   });
