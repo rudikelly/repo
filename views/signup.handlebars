@@ -1,46 +1,50 @@
-<div class="row">
-  <div class="col-md-6 offset-md-3 mt-3" style="width:95%;margin:0 auto;">
-    <form method="post" class="needs-validation" novalidate>
-      <div class="form-row form-group">
-        <div class="col">
-          <label for="firstNameInput">First Name</label>
-          <input type="text" class="form-control" id="firstNameInput" placeholder="First name" name="firstName" required>
+{{> head title='Sign Up' }}
+<body>
+  {{> navbar }}
+  <div class="row">
+    <div class="col-md-6 offset-md-3 mt-3" style="width:95%;margin:0 auto;">
+      <form method="post" class="needs-validation" novalidate>
+        <div class="form-row form-group">
+          <div class="col">
+            <label for="firstNameInput">First Name</label>
+            <input type="text" class="form-control" id="firstNameInput" placeholder="First name" name="firstName" required>
+          </div>
+          <div class="col">
+            <label for="lastNameInput">Last Name</label>
+            <input type="text" class="form-control" id="lastNameInput" placeholder="Last name" name="lastName" required>
+          </div>
         </div>
-        <div class="col">
-          <label for="lastNameInput">Last Name</label>
-          <input type="text" class="form-control" id="lastNameInput" placeholder="Last name" name="lastName" required>
+        <div class="form-group">
+          <label for="emailInput">Email address</label>
+          <input type="email" class="form-control" id="emailInput" placeholder="Enter email" name="email" required>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="emailInput">Email address</label>
-        <input type="email" class="form-control" id="emailInput" placeholder="Enter email" name="email" required>
-      </div>
-      <div class="form-group">
-        <label for="passwordInput">Password</label>
-        <input type="password" class="form-control" id="passwordInput" placeholder="Password" name="password"required>
-      </div>
-      <div class="form-group">
-        <label for="passwordInput">Confirm password</label>
-        <input type="password" class="form-control" id="confirmPasswordInput" placeholder="Password" name="confirmPassword"required>
-      </div>
-      <button type="submit" class="btn btn-dark btn-block">Submit</button>
-    </form>
+        <div class="form-group">
+          <label for="passwordInput">Password</label>
+          <input type="password" class="form-control" id="passwordInput" placeholder="Password" name="password"required>
+        </div>
+        <div class="form-group">
+          <label for="passwordInput">Confirm password</label>
+          <input type="password" class="form-control" id="confirmPasswordInput" placeholder="Password" name="confirmPassword"required>
+        </div>
+        <button type="submit" class="btn btn-dark btn-block">Submit</button>
+      </form>
+    </div>
   </div>
-</div>
-<script>
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    var forms = document.getElementsByClassName('needs-validation');
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
-</script>
+  <script>
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      var forms = document.getElementsByClassName('needs-validation');
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+  </script>
+</body>
