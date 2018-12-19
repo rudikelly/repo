@@ -10,41 +10,37 @@ router.get('/signup', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-  if (req.body.firstName &&
-      req.body.lastName &&
-      req.body.email &&
-      req.body.password) {
-
-    const userData = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-    };
-
-    User.findOne({email: req.body.email}, (err, user) => {
-      if (err) throw err;
-      else if (user) {
-        res.status(400)
-          .render('signup', {
-            title: 'Sign Up',
-            error: 'That email address is already in use',
-          });
-      }
-      else {
-        User.create(userData, function (error, user) {
-          if (error) {
-            throw error;
-          } else {
-            req.session.userId = user._id;
-            return res.send('signed in as ' + user.firstName);
-          }
-        });
-      }
-    });
-  } else {
+  if (!req.body.firstName ||
+      !req.body.lastName ||
+      !req.body.email ||
+      !req.body.password) {
     res.sendStatus(400);
   }
+
+  const userData = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: req.body.password,
+  };
+
+  User.findOne({email: userData.email}, (err, user) => {
+    if (err) throw err;
+    if (user) {
+      res.status(400)
+        .render('signup', {
+          title: 'Sign Up',
+          error: 'That email address is already in use',
+        });
+    }
+    else {
+      User.create(userData, function (err, user) {
+        if (err) throw err;
+        req.session.userId = user._id;
+        return res.send('signed in as ' + user.firstName);
+      });
+    }
+  });
 });
 
 router.get('/signin', (req, res) => {
