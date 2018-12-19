@@ -14,7 +14,10 @@ router.post('/signup', (req, res) => {
       !req.body.lastName ||
       !req.body.email ||
       !req.body.password) {
-    res.sendStatus(400);
+    res.status(400).render('signup', {
+      title: 'Sign Up',
+      error: 'Oops! You forgot to fill in some of the fields',
+    });
   }
 
   const userData = {
@@ -49,7 +52,10 @@ router.get('/signin', (req, res) => {
 
 router.post('/signin', (req, res) => {
   if (!req.body.email || !req.body.password) {
-    res.sendStatus(400);
+    res.status(400).render('signup', {
+      title: 'Sign Up',
+      error: 'Oops! You forgot to fill in some of the fields',
+    });
   }
 
   User.findOne({email: req.body.email}, (err, user) => {
