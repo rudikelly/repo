@@ -52,37 +52,34 @@ router.get('/signin', (req, res) => {
 });
 
 router.post('/signin', (req, res) => {
-  if (req.body.email &&
-      req.body.password) {
-
-    User.findOne({email: req.body.email}, (err, user) => {
-      if (err) throw err;
-      else if (!user) {
-        res.status(400)
-          .render('signin', {
-            title: 'Sign In',
-            error: 'Invalid credentials',
-          });
-      }
-      else {
-        bcrypt.compare(req.body.password, user.password, (err, result) => {
-          if (err) throw err;
-          if (result) {
-            req.session.userId = user._id;
-            res.redirect('profile');
-          } else {
-            res.status(400)
-              .render('signin', {
-                title: 'Sign In',
-                error: 'Invalid credentials',
-              });
-          }
-        });
-      }
-    });
-  } else {
+  if (!req.body.email || !req.body.password) {
     res.sendStatus(400);
   }
+
+  User.findOne({email: req.body.email}, (err, user) => {
+    if (err) throw err;
+    if (!user) {
+      res.status(400)
+        .render('signin', {
+          title: 'Sign In',
+          error: 'Invalid credentials',
+        });
+    } else {
+      bcrypt.compare(req.body.password, user.password, (err, result) => {
+        if (err) throw err;
+        if (result) {
+          req.session.userId = user._id;
+          res.redirect('profile');
+        } else {
+          res.status(400)
+            .render('signin', {
+              title: 'Sign In',
+              error: 'Invalid credentials',
+            });
+        }
+      });
+    }
+  });
 });
 
 router.get('/profile', (req, res) => {
