@@ -86,7 +86,9 @@ router.get('/profile', (req, res) => {
     User.findOne({_id: req.session.userId}, (err, user) => {
       if (err) throw err;
       res.render('profile',  {
-        name: user.firstName,
+        user: {
+          firstName: user.firstName,
+        },
       });
     });
   }
