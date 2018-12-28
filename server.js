@@ -18,11 +18,11 @@ const HOST = '0.0.0.0';
 
 const app = express();
 
-app.engine('handlebars', exphbs({
+app.engine('hbs', exphbs({
   defaultLayout: 'main',
 }));
 
-app.set('view engine', 'handlebars');
+app.set('view engine', 'hbs');
 app.set('trust proxy', true);
 app.set('x-powered-by', false);
 
