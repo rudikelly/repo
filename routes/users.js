@@ -8,7 +8,11 @@ const User = require('../models/user');
 const router = express.Router();
 
 router.get('/signup', (req, res) => {
-  res.render('signup');
+  if (req.session.userId) {
+    res.redirect('profile');
+  } else {
+    res.render('signup');
+  }
 });
 
 router.post('/signup', (req, res) => {
@@ -47,7 +51,11 @@ router.post('/signup', (req, res) => {
 });
 
 router.get('/signin', (req, res) => {
-  res.render('signin');
+  if (req.session.userId) {
+    res.redirect('profile');
+  } else {
+    res.render('signin');
+  }
 });
 
 router.post('/signin', (req, res) => {
