@@ -41,7 +41,7 @@ router.post('/signup', (req, res) => {
         });
     }
     else {
-      User.create(userData, function (err, user) {
+      User.create(userData, (err, user) => {
         if (err) throw err;
         req.session.userId = user._id;
         return res.redirect('profile');
