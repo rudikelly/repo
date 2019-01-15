@@ -24,9 +24,13 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  signupDate: {
+    type: Date,
+  },
 });
 
 UserSchema.pre('save', function(next) {
+  this.signupDate = Date.now();
   bcrypt.hash(this.password, 10, (err, hash) => {
     if (err) {
       return next(err);
