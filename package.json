@@ -19,6 +19,7 @@
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^2.0.3",
     "dotenv": "^6.2.0",
+    "dpkgjs": "git+https://github.com/rudikelly/dpkgjs.git",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
