@@ -12,6 +12,7 @@ const userRouter = require('./routes/users');
 const indexRouter = require('./routes/index');
 const uploadRouter = require('./routes/upload');
 const debRouter = require('./routes/debs');
+const adminRouter = require('./routes/admin');
 
 const PORT = 8080;
 const HOST = '0.0.0.0';
@@ -54,6 +55,7 @@ app.use(indexRouter);
 app.use(userRouter);
 app.use(uploadRouter);
 app.use(debRouter);
+app.use(adminRouter);
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
