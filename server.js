@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 
+const authRouter = require('./routes/auth');
 const userRouter = require('./routes/users');
 const indexRouter = require('./routes/index');
 const uploadRouter = require('./routes/upload');
@@ -51,6 +52,8 @@ app.use(session({
   },
 }));
 
+
+app.use(authRouter);
 app.use(indexRouter);
 app.use(userRouter);
 app.use(uploadRouter);

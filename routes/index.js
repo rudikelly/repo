@@ -7,14 +7,11 @@ const User = require('../models/user');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  if (req.session.userId) {
-    User.findOne({_id: req.session.userId}, (err, user) => {
-      if (err) throw err;
-      res.render('home',  {
-        user: {
-          firstName: user.firstName,
-        },
-      });
+  if (req.user) {
+    res.render('home',  {
+      user: {
+        firstName: req.user.firstName,
+      },
     });
   }
   else {
