@@ -7,6 +7,13 @@ const zlib = require('zlib');
 
 const router = express.Router();
 
+router.get('/admin*', (req, res, next) => {
+  if (req.user) {
+    if (req.user.admin) return next();
+  }
+  res.sendStatus(404);
+});
+
 router.get('/admin', (req, res) => {
   res.render('admin');
 });

@@ -27,6 +27,9 @@ const UserSchema = new mongoose.Schema({
   signupDate: {
     type: Date,
   },
+  admin: {
+    type: Boolean,
+  },
 });
 
 UserSchema.pre('save', function(next) {
