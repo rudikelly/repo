@@ -15,7 +15,11 @@ router.get('/admin*', (req, res, next) => {
 });
 
 router.get('/admin', (req, res) => {
-  res.render('admin');
+  res.render('admin', {
+    user: {
+      firstName: req.user.firstName,
+    },
+  });
 });
 
 router.get('/admin/refresh', (req, res) => {
