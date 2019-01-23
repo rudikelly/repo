@@ -57,6 +57,10 @@ app.use(uploadRouter);
 app.use(debRouter);
 app.use(adminRouter);
 
+app.use((req, res) => {
+  res.sendStatus(404);
+});
+
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
 
