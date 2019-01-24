@@ -15,9 +15,6 @@ const uploadRouter = require('./routes/upload');
 const debRouter = require('./routes/debs');
 const adminRouter = require('./routes/admin');
 
-const PORT = 8080;
-const HOST = '0.0.0.0';
-
 const app = express();
 
 app.engine('hbs', exphbs({
@@ -69,7 +66,9 @@ app.use((req, res) => {
   res.sendStatus(404);
 });
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+app.listen(8080, '0.0.0.0', () => {
+  console.log('Running on http://0.0.0.0:8080');
+});
+
 
 module.exports = app;
