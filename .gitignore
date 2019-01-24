@@ -6,3 +6,5 @@ static/Packages*
 *.crt
 *.key
 *.pem
+db/*
+!db/.gitkeep
