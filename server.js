@@ -29,12 +29,17 @@ app.set('view engine', 'hbs');
 app.set('trust proxy', true);
 app.set('x-powered-by', false);
 
-mongoose.connect(process.env.DB_URL + process.env.NODE_ENV, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-});
+function connectWithRetry() {
+  mongoose.connect(process.env.DB_URL + process.env.NODE_ENV, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  }, (err) => {
+    if (err) return setTimeout(connectWithRetry, 1000);
+    console.log('Successfully connected to DB');
+  });
+}
+connectWithRetry();
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
 
 app.use(express.static('static'));
 app.use(bodyParser.urlencoded({
