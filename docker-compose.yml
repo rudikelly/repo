@@ -30,6 +30,8 @@ services:
     image: mongo
     networks:
       - repo-net
+    volumes:
+      - ./db:/data/db
 
 networks:
   repo-net:
