@@ -7,6 +7,10 @@ const User = require('../models/user');
 
 const router = express.Router();
 
+/**
+ * GET /signup
+ * Signup page.
+ */
 router.get('/signup', (req, res) => {
   if (req.user) {
     res.redirect('profile');
@@ -15,6 +19,10 @@ router.get('/signup', (req, res) => {
   }
 });
 
+/**
+ * POST /signup
+ * Creates user accounts.
+ */
 router.post('/signup', (req, res) => {
   if (!req.body.firstName ||
       !req.body.lastName ||
@@ -50,6 +58,10 @@ router.post('/signup', (req, res) => {
   });
 });
 
+/**
+ * GET /signin
+ * Presents login page.
+ */
 router.get('/signin', (req, res) => {
   if (req.user) {
     res.redirect('profile');
@@ -89,6 +101,10 @@ router.post('/signin', (req, res) => {
   });
 });
 
+/**
+ * GET /profile
+ * User's profile page.
+ */
 router.get('/profile', (req, res) => {
   if (req.user) {
     res.render('profile',  {

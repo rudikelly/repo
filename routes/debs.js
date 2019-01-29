@@ -4,6 +4,10 @@ const express = require('express');
 
 const router = express.Router();
 
+/**
+ * GET /deb/:deb
+ * Serves requested deb packages
+ */
 router.get('/deb/:deb', (req, res) => {
   const deb = req.params.deb;
   res.sendFile(deb, {root: './deb'}, (err) => {

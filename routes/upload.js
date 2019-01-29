@@ -24,10 +24,18 @@ const upload = multer({
   },
 });
 
+/**
+ * GET /upload
+ * Upload page.
+ */
 router.get('/upload', (req, res) => {
   res.render('upload', {title: 'Upload'});
 });
 
+/**
+ * POST /upload
+ * Endpoint for iploading .deb packages.
+ */
 router.post('/upload', upload.single('deb'), (req, res) => {
   if (req.file == null) {
     res.send('invalid file');

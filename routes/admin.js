@@ -7,6 +7,10 @@ const zlib = require('zlib');
 
 const router = express.Router();
 
+/**
+ * GET /admin/*
+ * Checks users have admin privileges.
+ */
 router.get('/admin*', (req, res, next) => {
   if (req.user) {
     if (req.user.admin) return next();
@@ -14,6 +18,10 @@ router.get('/admin*', (req, res, next) => {
   res.sendStatus(404);
 });
 
+/**
+ * GET /admin
+ * Admin control panel.
+ */
 router.get('/admin', (req, res) => {
   res.render('admin', {
     user: {
@@ -22,6 +30,10 @@ router.get('/admin', (req, res) => {
   });
 });
 
+/**
+ * GET /admin/refresh
+ * Refreshes Packages listings.
+ */
 router.get('/admin/refresh', (req, res) => {
   dpkg.scanDir('./deb', packages => {
     var packagesString = '';
