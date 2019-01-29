@@ -29,7 +29,15 @@ const upload = multer({
  * Upload page.
  */
 router.get('/upload', (req, res) => {
-  res.render('upload', {title: 'Upload'});
+  if (req.user) {
+    res.render('upload', {
+      user: {
+        firstname: req.user.firstname,
+      },
+    });
+  } else {
+    res.render('upload');
+  }
 });
 
 /**
