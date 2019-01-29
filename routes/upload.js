@@ -30,14 +30,13 @@ const upload = multer({
  */
 router.get('/upload', (req, res) => {
   if (req.user) {
-    res.render('upload', {
+    return res.render('upload', {
       user: {
         firstname: req.user.firstname,
       },
     });
-  } else {
-    res.render('upload');
   }
+  res.render('upload');
 });
 
 /**
@@ -46,10 +45,9 @@ router.get('/upload', (req, res) => {
  */
 router.post('/upload', upload.single('deb'), (req, res) => {
   if (req.file == null) {
-    res.send('invalid file');
-  } else {
-    res.send('received: ' + req.file.originalname);
+    return res.send('invalid file');
   }
+  res.send('received: ' + req.file.originalname);
 });
 
 module.exports = router;

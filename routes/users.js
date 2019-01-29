@@ -13,10 +13,9 @@ const router = express.Router();
  */
 router.get('/signup', (req, res) => {
   if (req.user) {
-    res.redirect('profile');
-  } else {
-    res.render('signup');
+    return res.redirect('profile');
   }
+  res.render('signup');
 });
 
 /**
@@ -28,7 +27,7 @@ router.post('/signup', (req, res) => {
       !req.body.lastName ||
       !req.body.email ||
       !req.body.password) {
-    res.status(400).render('signup', {
+    return res.status(400).render('signup', {
       error: 'Oops! You forgot to fill in some of the fields',
     });
   }
@@ -43,18 +42,16 @@ router.post('/signup', (req, res) => {
   User.findOne({email: userData.email}, (err, user) => {
     if (err) throw err;
     if (user) {
-      res.status(400)
+      return res.status(400)
         .render('signup', {
           error: 'That email address is already in use',
         });
     }
-    else {
-      User.create(userData, (err, user) => {
-        if (err) throw err;
-        req.session.userId = user._id;
-        return res.redirect('profile');
-      });
-    }
+    User.create(userData, (err, user) => {
+      if (err) throw err;
+      req.session.userId = user._id;
+      return res.redirect('profile');
+    });
   });
 });
 
@@ -64,15 +61,14 @@ router.post('/signup', (req, res) => {
  */
 router.get('/signin', (req, res) => {
   if (req.user) {
-    res.redirect('profile');
-  } else {
-    res.render('signin');
+    return res.redirect('profile');
   }
+  res.render('signin');
 });
 
 router.post('/signin', (req, res) => {
   if (!req.body.email || !req.body.password) {
-    res.status(400).render('signup', {
+    return res.status(400).render('signup', {
       error: 'Oops! You forgot to fill in some of the fields',
     });
   }
@@ -80,24 +76,22 @@ router.post('/signin', (req, res) => {
   User.findOne({email: req.body.email}, (err, user) => {
     if (err) throw err;
     if (!user) {
+      return res.status(400)
+        .render('signin', {
+          error: 'Invalid credentials',
+        });
+    }
+    bcrypt.compare(req.body.password, user.password, (err, result) => {
+      if (err) throw err;
+      if (result) {
+        req.session.userId = user._id;
+        return res.redirect('profile');
+      }
       res.status(400)
         .render('signin', {
           error: 'Invalid credentials',
         });
-    } else {
-      bcrypt.compare(req.body.password, user.password, (err, result) => {
-        if (err) throw err;
-        if (result) {
-          req.session.userId = user._id;
-          res.redirect('profile');
-        } else {
-          res.status(400)
-            .render('signin', {
-              error: 'Invalid credentials',
-            });
-        }
-      });
-    }
+    });
   });
 });
 
@@ -107,15 +101,13 @@ router.post('/signin', (req, res) => {
  */
 router.get('/profile', (req, res) => {
   if (req.user) {
-    res.render('profile',  {
+    return res.render('profile',  {
       user: {
         firstName: req.user.firstName,
       },
     });
   }
-  else {
-    res.redirect('/');
-  }
+  res.redirect('/');
 });
 
 router.get('/logout', (req, res) => {

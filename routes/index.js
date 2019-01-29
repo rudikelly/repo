@@ -12,15 +12,13 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   if (req.user) {
-    res.render('home',  {
+    return res.render('home',  {
       user: {
         firstName: req.user.firstName,
       },
     });
   }
-  else {
-    res.render('home');
-  }
+  res.render('home');
 });
 
 module.exports = router;
