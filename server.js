@@ -67,7 +67,10 @@ app.use((req, res) => {
 });
 
 app.listen(8080, '0.0.0.0', () => {
-  console.log('Running on http://0.0.0.0:8080');
+  console.log(
+    'Running on http://localhost:8080 in %s mode',
+    app.get('env')
+  );
 });
 
 
