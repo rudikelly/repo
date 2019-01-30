@@ -41,7 +41,7 @@ router.get('/upload', (req, res) => {
 
 /**
  * POST /upload
- * Endpoint for iploading .deb packages.
+ * Endpoint for uploading .deb packages.
  */
 router.post('/upload', upload.single('deb'), (req, res) => {
   if (req.file == null) {
