@@ -45,7 +45,9 @@ router.get('/upload', (req, res) => {
  */
 router.post('/upload', upload.single('deb'), (req, res) => {
   if (req.file == null) {
-    return res.send('invalid file');
+    return res.render('upload', {
+      error: 'Invalid package',
+    });
   }
   res.send('received: ' + req.file.originalname);
 });
