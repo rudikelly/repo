@@ -66,6 +66,10 @@ router.get('/signin', (req, res) => {
   res.render('signin');
 });
 
+/**
+ * POST /signin
+ * Authenticates users
+ */
 router.post('/signin', (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).render('signup', {
@@ -110,6 +114,10 @@ router.get('/profile', (req, res) => {
   res.redirect('/');
 });
 
+/**
+ * GET /logout
+ * Destroys a user's session data
+ */
 router.get('/logout', (req, res) => {
   if (req.session) {
     req.session.destroy((err) => {
