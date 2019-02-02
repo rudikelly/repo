@@ -7,7 +7,7 @@ const User = require('../models/user');
 const router = express.Router();
 
 /**
- * GET /admin
+ * GET /
  * Index/Home page.
  */
 router.get('/', (req, res) => {
