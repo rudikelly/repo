@@ -1,0 +1,21 @@
+{{> head title='Upload' }}
+<body>
+  {{> navbar }}
+    <div class="row">
+      <div class="col-md-6 offset-md-3 mt-1" style="width:95%;margin:0 auto;">
+        <form method="post" enctype="multipart/form-data">
+          <div class="custom-file mt-2">
+            <input type="file" class="custom-file-input" id="fileUpload" name="deb">
+            <label class="custom-file-label" for="fileUpload" style="overflow:hidden">Choose file (.deb)</label>
+          </div>
+          <input type="submit" class="btn btn-dark btn-block mt-2"></input>
+        </form>
+      </div>
+    </div>
+    <script>
+    $('#fileUpload').on('change',function(){
+      var fileName = $(this).val().replace('C:\\fakepath\\', '');
+      $(this).next('.custom-file-label').html(fileName);
+    });
+    </script>
+</body>

@@ -2,18 +2,12 @@
 
 const express = require('express');
 const multer = require('multer');
+const dpkg = require('dpkgjs');
 
 const router = express.Router();
 
 const upload = multer({
-  storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'uploads');
-    },
-    filename: (req, file, cb) => {
-      cb(null, file.originalname);
-    },
-  }),
+  storage: multer.memoryStorage(),
   fileFilter: (req, file, cb) => {
     var extCheck = file.originalname.split('.').slice(-1)[0] == 'deb';
     var mimeCheck = file.mimetype == 'application/octet-stream';
@@ -30,13 +24,13 @@ const upload = multer({
  */
 router.get('/upload', (req, res) => {
   if (req.user) {
-    return res.render('upload', {
+    return res.render('upload/package', {
       user: {
         firstname: req.user.firstname,
       },
     });
   }
-  res.render('upload');
+  res.render('upload/package');
 });
 
 /**
@@ -45,11 +39,28 @@ router.get('/upload', (req, res) => {
  */
 router.post('/upload', upload.single('deb'), (req, res) => {
   if (req.file == null) {
-    return res.render('upload', {
+    return res.render('upload/package', {
       error: 'Invalid package',
     });
   }
-  res.send('received: ' + req.file.originalname);
+  const fileData = req.file.buffer;
+  dpkg.getControlFromFile(fileData, (controlData) => {
+    if (!controlData) {
+      res.render('upload/package', {
+        error: 'Invalid package',
+      });
+    }
+    res.render('upload/packagedata', {
+      package: {
+        bundleid: controlData.Package,
+        description: controlData.Description,
+        maintainer: controlData.Maintainer,
+        author: controlData.Author,
+        section: controlData.Section,
+        version: controlData.Version,
+      },
+    });
+  });
 });
 
 module.exports = router;

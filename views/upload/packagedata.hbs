@@ -1,0 +1,48 @@
+{{> head title='Upload' }}
+<body>
+  {{> navbar }}
+  {{#if package}}
+    {{#with package}}
+      <div class="row">
+        <div class="col-md-6 offset-md-3 mt-1" style="width:95%;margin:0 auto;">
+          <form method="post">
+            <div class="form-group">
+             <label for="inputBundleID">Bundle ID</label>
+             <input class="form-control" type="text" id=inputBundleID value="{{ bundleid }}" readonly>
+            </div>
+            <div class="form-row form-group">
+              <div class="col">
+                <div class="form-group">
+                 <label for="inputSection">Section</label>
+                 <input class="form-control" type="text" id=inputSection value="{{ section }}">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                 <label for="inputVersion">Version</label>
+                 <input class="form-control" type="text" id=inputVersion value="{{ version }}" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+             <label for="inputAuthor">Author</label>
+             <input class="form-control" type="text" id=inputAuthor value="{{ author }}">
+            </div>
+            <div class="form-group">
+             <label for="inputShortDesc">Description (Short)</label>
+             <input class="form-control" type="text" id=inputShortDesc value="{{ description }}">
+            </div>
+            <div class="form-group">
+             <label for="inputDesc">Description (Long)</label>
+             <textarea class="form-control" type="text" id=inputDesc rows="6">{{ description }}</textarea>
+             <small class="form-text text-muted">Supports <a href="">markdown</a></small>
+            </div>
+            <input type="submit" class="btn btn-dark btn-block mt-2"></input>
+          </form>
+        </div>
+      </div>
+    {{/with}}
+  {{else}}
+    {{> error error='Invalid package' }}
+  {{/if}}
+</body>
