@@ -17,13 +17,13 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "connect-mongo": "^2.0.3",
+    "connect-mongo": "^3.0.0",
     "dotenv": "^6.2.0",
     "dpkgjs": "git+https://github.com/rudikelly/dpkgjs.git",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
-    "mongoose": "^5.4.8",
+    "mongoose": "^5.4.10",
     "multer": "^1.4.1"
   },
   "devDependencies": {
